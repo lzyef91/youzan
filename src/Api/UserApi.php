@@ -17,8 +17,8 @@ class UserApi extends YouzanApi
         $version = '1.0.0';
         $paramsMap = [];
         $forceParamsMap = [
-            'account_id', // 帐号类型。目前支持以下选项（只支持传一种）： Mobile：手机号， UnionId：微信 UnionId
-            'account_type' // 账号ID
+            'account_type', // 帐号类型。目前支持以下选项（只支持传一种）： Mobile：手机号， UnionId：微信 UnionId
+            'account_id' // 账号ID
         ];
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
         return $this->request($method, $version, $params);
@@ -62,17 +62,17 @@ class UserApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
-    // public function wxShow($params)
-    // {
-    //     $method = 'youzan.users.weixin.follower.get';
-    //     $version = '3.0.0';
-    //     $paramsMap = [
-    //         'fields', // 需要返回的微信粉丝对象字段，如nick,avatar等。可选值：CrmWeixinFans微信粉丝结构体中所有字段均可返回；多个字段用“,”分隔。如果为空则返回所有
-    //         'weixin_openid', // 微信粉丝用户的openid
-    //         'fans_id', // 微信粉丝用户ID。 调用时，参数 weixin_openid 和 fans_id 选其一即可
-    //     ];
-    //     $forceParamsMap = [];
-    //     $params = $this->loadParams($params, $paramsMap, $forceParamsMap, false);
-    //     return $this->request($method, $version, $params);
-    // }
+    public function wxShow($params)
+    {
+        $method = 'youzan.users.weixin.follower.get';
+        $version = '3.0.0';
+        $paramsMap = [
+            'fields', // 需要返回的微信粉丝对象字段，如nick,avatar等。可选值：CrmWeixinFans微信粉丝结构体中所有字段均可返回；多个字段用“,”分隔。如果为空则返回所有
+            'weixin_openid', // 微信粉丝用户的openid
+            'fans_id', // 微信粉丝用户ID。 调用时，参数 weixin_openid 和 fans_id 选其一即可
+        ];
+        $forceParamsMap = [];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap, false);
+        return $this->request($method, $version, $params);
+    }
 }

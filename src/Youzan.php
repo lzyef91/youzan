@@ -6,6 +6,8 @@ use Nldou\Youzan\Token;
 use Nldou\Youzan\Api\GoodsApi;
 use Nldou\Youzan\Api\SalesmanApi;
 use Nldou\Youzan\Api\UserApi;
+use Nldou\Youzan\Api\OrdersApi;
+use Nldou\Youzan\Api\CouponsApi;
 use Nldou\Youzan\Exceptions\InvalidApiException;
 
 class Youzan
@@ -15,7 +17,9 @@ class Youzan
     private $mapApiClass = [
         'goods' => GoodsApi::class,
         'salesman' => SalesmanApi::class,
-        'user' => UserApi::class
+        'user' => UserApi::class,
+        'orders' => OrdersApi::class,
+        'coupons' => CouponsApi::class
     ];
 
     public function __construct(Token $token)
@@ -33,5 +37,10 @@ class Youzan
             $this->api[$apiClass] = new $apiClass($this->token);
         }
         return $this->api[$apiClass];
+    }
+
+    public function __call($name, $arguments)
+    {
+        return $this->api($name);
     }
 }

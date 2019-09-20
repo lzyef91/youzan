@@ -6,15 +6,35 @@ use Nldou\Youzan\Token;
 
 class SalesmanApi extends YouzanApi
 {
+    public static $ERRCODE_SALESMAN_NOT_EXIST = '341007204';
+
     public function __construct(Token $token)
     {
         parent::__construct($token);
     }
 
     /**
+     * 分销员列表
+     */
+    public function accountIndex($params)
+    {
+        $method = 'youzan.salesman.accounts.get';
+        $version = '3.0.0';
+
+        $paramsMap = [];
+        $forceParamsMap = [
+            'page_no',
+            'page_size' // 最大不超过100
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+
+        return $this->request($method, $version, $params);
+    }
+
+    /**
      * 账户信息
      */
-    public function accountShow($params = [])
+    public function accountShow($params)
     {
         $method = 'youzan.salesman.account.get';
         $version = '3.0.1';
@@ -139,6 +159,20 @@ class SalesmanApi extends YouzanApi
             'mobile', // 手机号（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询）
             'fans_type', // 粉丝类型（自有粉丝: fans_type = 1；当传mobile时，和fans_id一样传0）
             'fans_id' // 粉丝id（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+
+        return $this->request($method, $version, $params);
+    }
+
+    public function itemsShow($params)
+    {
+        $method = 'youzan.salesman.items.get';
+        $version = '3.0.0';
+
+        $paramsMap = [];
+        $forceParamsMap = [
+            'item_ids', // string 商品id列表，逗号分隔
         ];
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
 
