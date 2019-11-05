@@ -72,7 +72,23 @@ class UserApi extends YouzanApi
             'fans_id', // 微信粉丝用户ID。 调用时，参数 weixin_openid 和 fans_id 选其一即可
         ];
         $forceParamsMap = [];
-        $params = $this->loadParams($params, $paramsMap, $forceParamsMap, false);
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+        return $this->request($method, $version, $params);
+    }
+
+    public function customersIndex($params)
+    {
+        $method = 'youzan.scrm.customer.search';
+        $version = '3.1.0';
+        $paramsMap = [
+            'created_at_start', // 成为客户的时间，起始值，时间戳格式，单位是秒
+            'created_at_end', // 成为客户的时间，截止值，时间戳格式，单位是秒
+            'is_member', // 是否为会员，0表示非会员，1表示会员
+            'page', // 页码，最多支持500页(500页是以每页默认值20为单位，客户查询最大为10000)
+            'page_size' // 每页数量，最多支持50个
+        ];
+        $forceParamsMap = [];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
         return $this->request($method, $version, $params);
     }
 }

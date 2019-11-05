@@ -25,4 +25,34 @@ class CouponsApi extends YouzanApi
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
         return $this->request($method, $version, $params);
     }
+
+    public function take($params = [])
+    {
+        $method = 'youzan.ump.coupon.take';
+        $version = '3.0.0';
+        $paramsMap = [];
+        $forceParamsMap = [
+            'coupon_group_id', // 优惠券/码活动ID
+            'weixin_openid', // 微信服务号对应的openid
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+        return $this->request($method, $version, $params);
+    }
+
+    public function fetchlogs($params = [])
+    {
+        $method = 'youzan.ump.coupon.consume.fetchlogs.get';
+        $version = '3.0.0';
+        $paramsMap = [
+            'end_taked', // 领取时间结束，2019-03-29 16:40:00
+            'start_taked'// 领取时间开始，2019-03-29 16:40:00
+        ];
+        $forceParamsMap = [
+            'page_no',
+            'page_size',
+            'coupon_group_id', // 优惠券/码活动ID
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+        return $this->request($method, $version, $params);
+    }
 }
