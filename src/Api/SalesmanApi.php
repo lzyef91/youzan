@@ -74,6 +74,23 @@ class SalesmanApi extends YouzanApi
     }
 
     /**
+     * 订单归属
+     */
+    public function tradeAccount($params)
+    {
+        $method = 'youzan.salesman.trades.account.get';
+        $version = '3.0.0';
+
+        $paramsMap = [];
+        $forceParamsMap = [
+            'order_no' // 订单号
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+
+        return $this->request($method, $version, $params);
+    }
+
+    /**
      * 推广订单列表
      */
     public function tradesIndex($params)
