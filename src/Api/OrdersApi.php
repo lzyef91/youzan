@@ -26,13 +26,15 @@ class OrdersApi extends YouzanApi
     public function tradesIndex($params = [])
     {
         $method = 'youzan.trades.sold.get';
-        $version = '4.0.0';
+        $version = '4.0.1';
         $paramsMap = [
+            'keywords', // 通用搜索字段，使用底层符合条件查询搜索
             'type', // 订单类型
             'status', // 订单状态
             'express_type', // 物流类型
             'tid', // 订单号
             'goods_id', // 商品id
+            'goods_title', // 商品标题
             'fans_type',
             'fans_id',
             'buyer_id', // 买家ID
@@ -45,6 +47,7 @@ class OrdersApi extends YouzanApi
             'page_no',
             'page_size',
             'need_order_url', // boolean 是否需要返回订单url
+            'yz_open_id' // 有赞对外统一openId
         ];
         $forceParamsMap = [];
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
