@@ -9,7 +9,7 @@ use Nldou\Youzan\Youzan;
 class ServiceProvider extends LaravelServiceProvider
 {
     protected $defer = true;
-    
+
     /**
      * Boot the provider.
      */
@@ -33,8 +33,8 @@ class ServiceProvider extends LaravelServiceProvider
         $kdtId = config('youzan.kdt_id');
         $tokenClient = new Token($clientId, $clientSecret, $kdtId);
 
-        $this->app->singleton(Youzan::class, function ($laravelApp) use ($tokenClient) {
-            return new Youzan($tokenClient);
+        $this->app->singleton(Youzan::class, function ($laravelApp) use ($clientId, $clientSecret, $tokenClient) {
+            return new Youzan($clientId, $clientSecret, $tokenClient);
         });
         $this->app->alias(Youzan::class, 'youzan');
     }
