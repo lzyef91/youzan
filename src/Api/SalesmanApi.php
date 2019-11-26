@@ -217,16 +217,17 @@ class SalesmanApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
-    public function customerIndex($params)
+    public function customerIndex($params, $version = '3.0.1')
     {
         $method = 'youzan.salesman.customers.get';
-        $version = '3.0.0';
 
-        $paramsMap = [];
+        $paramsMap = [
+            'ds_uid', // 分销员userId，当dsUid和mobile都传时，优先按mobile查询
+            'mobile', // 分销员手机号,
+            'fans_id',
+            'fans_type'
+        ];
         $forceParamsMap = [
-            'mobile', // 手机号（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询）
-            'fans_type', // 粉丝类型（自有粉丝: fans_type = 1；当传mobile时，和fans_id一样传0）
-            'fans_id', // 粉丝id（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询
             'page_no',
             'page_size'
         ];
