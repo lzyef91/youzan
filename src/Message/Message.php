@@ -2,6 +2,7 @@
 
 namespace Nldou\Youzan\Message;
 
+use Nldou\Youzan\Message\Trade\Create;
 use Nldou\Youzan\Message\Trade\BuyerPay;
 use Nldou\Youzan\Message\Trade\SellerShip;
 use Nldou\Youzan\Message\Trade\Success;
@@ -10,12 +11,14 @@ use Nldou\Youzan\Support\Arr;
 
 class Message
 {
+    const TRADE_CREATE = 'trade_TradeCreate';
     const TRADE_BUYER_PAY = 'trade_TradeBuyerPay';
     const TRADE_SELLER_SHIP = 'trade_TradeSellerShip';
     const TRADE_SUCCESS = 'trade_TradeSuccess';
     const TRADE_CLOSE = 'trade_TradeClose';
 
     const MESSAGE_TYPE_MAP = [
+        'trade_TradeCreate' => Create::class,
         'trade_TradeBuyerPay' => BuyerPay::class,
         'trade_TradeSellerShip' => SellerShip::class,
         'trade_TradeSuccess' => Success::class,

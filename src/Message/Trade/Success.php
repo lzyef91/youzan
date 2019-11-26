@@ -18,8 +18,6 @@ class Success extends Message
      */
     protected $properties = [
         'tid' => 'tid',
-        'close_reson' => 'close_reson',
-        'close_type' => 'close_type',
         'update_time' => 'update_time'
     ];
 

@@ -4,12 +4,12 @@ namespace Nldou\Youzan\Message\Trade;
 
 use Nldou\Youzan\Message\Message;
 
-class BuyerPay extends Message
+class Create extends Message
 {
     /**
      * @var string
      */
-    public $type = 'trade_TradeBuyerPay';
+    public $type = 'trade_TradeCreate';
 
     /**
      * Properties.
@@ -45,7 +45,6 @@ class BuyerPay extends Message
         'status' => 'full_order_info.order_info.status',
         'close_type' => 'full_order_info.order_info.close_type',
         'created_time' => 'full_order_info.order_info.created',
-        'pay_time' => 'full_order_info.order_info.pay_time',
         'update_time' => 'full_order_info.order_info.update_time',
         /* promo info */
         /* 订单优惠总金额 */
@@ -53,11 +52,7 @@ class BuyerPay extends Message
         /* 商品优惠总金额 */
         'promo_item_discount_fee' => 'order_promotion.item_discount_fee',
         /* 订单改价金额 */
-        'promo_adjust_fee' => 'order_promotion.adjust_fee',
-        /* 订单级优惠信息 */
-        'promo_order' => 'order_promotion.order',
-        /* 商品级优惠信息 */
-        'promo_item' => 'order_promotion.item'
+        'promo_adjust_fee' => 'order_promotion.adjust_fee'
     ];
 
     /**
