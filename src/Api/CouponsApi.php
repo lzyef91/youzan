@@ -26,6 +26,18 @@ class CouponsApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
+    public function show($params = [])
+    {
+        $method = 'youzan.ump.promocard.detail.get';
+        $version = '3.0.1';
+        $paramsMap = [];
+        $forceParamsMap = [
+            'id', // 优惠券id
+        ];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+        return $this->request($method, $version, $params);
+    }
+
     public function take($params = [])
     {
         $method = 'youzan.ump.coupon.take';
