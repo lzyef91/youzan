@@ -185,7 +185,7 @@ class SalesmanApi extends YouzanApi
     public function itemsShow($params)
     {
         $method = 'youzan.salesman.items.get';
-        $version = '3.0.0';
+        $version = '3.0.1';
 
         $paramsMap = [];
         $forceParamsMap = [
