@@ -79,7 +79,7 @@ class UserApi extends YouzanApi
     public function customersIndex($params)
     {
         $method = 'youzan.scrm.customer.search';
-        $version = '3.1.0';
+        $version = '3.1.2';
         $paramsMap = [
             'created_at_start', // 成为客户的时间，起始值，时间戳格式，单位是秒
             'created_at_end', // 成为客户的时间，截止值，时间戳格式，单位是秒
