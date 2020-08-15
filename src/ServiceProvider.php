@@ -3,20 +3,17 @@
 namespace Nldou\Youzan;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Nldou\Youzan\Token;
-use Nldou\Youzan\Youzan;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class ServiceProvider extends LaravelServiceProvider
+class ServiceProvider extends LaravelServiceProvider implements DeferrableProvider
 {
-    protected $defer = true;
-
     /**
      * Boot the provider.
      */
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/config' => config_path()], 'nldou-youzan-config');
+            $this->publishes([__DIR__.'/Config' => config_path()], 'nldou-youzan-config');
         }
     }
 

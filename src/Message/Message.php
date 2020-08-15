@@ -7,7 +7,7 @@ use Nldou\Youzan\Message\Trade\BuyerPay;
 use Nldou\Youzan\Message\Trade\SellerShip;
 use Nldou\Youzan\Message\Trade\Success;
 use Nldou\Youzan\Message\Trade\Close;
-use Nldou\Youzan\Support\Arr;
+use Illuminate\Support\Arr;
 
 class Message
 {
