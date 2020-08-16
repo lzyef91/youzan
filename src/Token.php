@@ -30,7 +30,7 @@ class Token
         $this->tokenClient = new TokenClient($this->clientId, $this->clientSecret);
     }
 
-    public function getToken()
+    private function getToken()
     {
         // 缓存中获取token
         $token = Cache::get(self::CACHE_TOKEN);
@@ -131,7 +131,7 @@ class Token
      */
     public function getAccessToken()
     {
-        return $this->token;
+        return $this->getToken()->token;
     }
 
     /**

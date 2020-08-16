@@ -7,6 +7,7 @@ use Nldou\Youzan\Message\Trade\BuyerPay;
 use Nldou\Youzan\Message\Trade\SellerShip;
 use Nldou\Youzan\Message\Trade\Success;
 use Nldou\Youzan\Message\Trade\Close;
+use Nldou\Youzan\Message\Salesman\Account;
 use Illuminate\Support\Arr;
 
 class Message
@@ -22,7 +23,8 @@ class Message
         'trade_TradeBuyerPay' => BuyerPay::class,
         'trade_TradeSellerShip' => SellerShip::class,
         'trade_TradeSuccess' => Success::class,
-        'trade_TradeClose' => Close::class
+        'trade_TradeClose' => Close::class,
+        'salesman_account_event' => Account::class
     ];
 
     /**

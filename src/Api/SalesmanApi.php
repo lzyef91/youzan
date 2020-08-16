@@ -101,12 +101,12 @@ class SalesmanApi extends YouzanApi
         $paramsMap = [
             'start_time', // 查询开始时间（时间戳，单位秒）
             'end_time', // 查询结束时间（时间戳，单位秒
-            'order_no' // 订单号
-        ];
-        $forceParamsMap = [
+            'order_no', // 订单号
             'mobile', // 手机号（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询）
             'fans_type', // 粉丝类型（自有粉丝: fans_type = 1；当传mobile时，和fans_id一样传0）
             'fans_id', // 粉丝id（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询
+        ];
+        $forceParamsMap = [
             'page_no',
             'page_size'
         ];
