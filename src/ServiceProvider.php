@@ -28,7 +28,8 @@ class ServiceProvider extends LaravelServiceProvider implements DeferrableProvid
         $clientId = config('youzan.client_id');
         $clientSecret = config('youzan.client_secret');
         $kdtId = config('youzan.kdt_id');
-        $tokenClient = new Token($clientId, $clientSecret, $kdtId);
+        $appType = config('youzan.app_type');
+        $tokenClient = new Token($clientId, $clientSecret, $kdtId, $appType);
 
         $this->app->singleton(Youzan::class, function ($laravelApp) use ($clientId, $clientSecret, $tokenClient) {
             return new Youzan($clientId, $clientSecret, $tokenClient);

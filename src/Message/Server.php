@@ -46,9 +46,7 @@ class Server
 
     protected function checkValidMsgType($type)
     {
-        if (!array_key_exists($type, Message::MESSAGE_TYPE_MAP)) {
-            throw new InvalidParamsException('invalid_message_type');
-        }
+        return \array_key_exists($type, Message::MESSAGE_TYPE_MAP);
     }
 
     /**
@@ -59,15 +57,22 @@ class Server
      */
     public function push(MessageHandlerInterface $handler, $msgType)
     {
-        if (is_array($msgType)) {
+        if (\is_array($msgType)) {
+
             foreach($msgType as $t){
-                $this->checkValidMsgType($t);
-                $this->handlers[$t][] = $handler;
+                if ($this->checkValidMsgType($t)) {
+                    $this->handlers[$t][] = $handler;
+                }
             }
-        } else {
-            $this->checkValidMsgType($msgType);
+
+            return $this;
+        }
+
+        if ($this->checkValidMsgType($msgType)) {
             $this->handlers[$msgType][] = $handler;
         }
+
+        return $this;
 
     }
 
@@ -75,7 +80,7 @@ class Server
     {
         // 校验签名
         if (!$this->checkSign()) {
-            return ['code' => 0,'msg' => 'faild'];
+            return ['code' => 0,'msg' => 'success'];
         }
 
         // 获取message实例
@@ -118,8 +123,8 @@ class Server
             // message实例
             $msgCls = Message::MESSAGE_TYPE_MAP[$this->httpType];
             return new $msgCls($msg);
-        } else {
-            return NULL;
         }
+
+        return NULL;
     }
 }

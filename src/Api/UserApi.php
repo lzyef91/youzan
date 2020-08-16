@@ -11,6 +11,14 @@ class UserApi extends YouzanApi
         parent::__construct($token);
     }
 
+    /**
+     * 是否存在有赞账号
+     * @param array $params
+     * [
+     *      account_type string 帐号类型。目前支持以下选项（只支持传一种）： Mobile：手机号， UnionId：微信 UnionId
+     *      account_id 账号ID
+     * ]
+     */
     public function check($params = [])
     {
         $method = 'youzan.users.account.check';
@@ -24,6 +32,18 @@ class UserApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
+    /**
+     * 创建客户
+     * @param array $params
+     * [
+     *      mobile string 必填，注册手机号
+     *      customer_create.remark string 客户信息备注
+     *      customer_create.birthday string 生日 1988-05-13 00:00:00
+     *      customer_create.name string 姓名
+     *      customer_create.gender int 性别，0：未知；1：男；2：女
+     *      customer_create.contact_address.area_code 地域编码
+     * ]
+     */
     public function customCreate($params = [])
     {
         $method = 'youzan.scrm.customer.create';
@@ -34,7 +54,6 @@ class UserApi extends YouzanApi
                 'birthday', // string 生日
                 'name', // 姓名
                 'contact_address' => [
-                    'address', // string 详细地址
                     'area_code' // int 地域编码
                 ],
                 'gender' // 性别，0：未知；1：男；2：女

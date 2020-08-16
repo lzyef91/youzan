@@ -19,8 +19,12 @@ class YouzanApi
 
     protected function request(string $method, string $apiVersion, array $params = [])
     {
-        $acceessToken = $this->token->getToken()->getAccessToken();
+        // 请求token
+        $acceessToken = $this->token->getAccessToken();
+
+        // 客户端
         $client = new Client($acceessToken);
+
         try {
             $response = $client->post($method, $apiVersion, $params);
         } catch (\Exception $e) {
@@ -41,7 +45,7 @@ class YouzanApi
             $msg = $response['gw_err_resp']['err_msg'];
             throw new ApiResponseException("ApiResponseError-{$method}-{$apiVersion}: {$code} {$msg}", $code);
         }
-        
+
         // 返回结果
         if (isset($response['data'])) {
             return $response['data'];
