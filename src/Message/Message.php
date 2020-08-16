@@ -58,6 +58,11 @@ class Message
         }
     }
 
+    public function getAllProperties()
+    {
+        return $this->msg;
+    }
+
     public function __get($prop)
     {
         return $this->getProperty($prop);
