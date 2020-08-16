@@ -17,6 +17,7 @@ class Message
     const TRADE_SELLER_SHIP = 'trade_TradeSellerShip';
     const TRADE_SUCCESS = 'trade_TradeSuccess';
     const TRADE_CLOSE = 'trade_TradeClose';
+    const SALESMAN_ACCOUNT_EVENT = 'salesman_account_event';
 
     const MESSAGE_TYPE_MAP = [
         'trade_TradeCreate' => Create::class,
