@@ -1,19 +1,19 @@
 <?php
 
 /**
- * 订单发货
+ * 订单部分发货
  */
 
 namespace Nldou\Youzan\Message\Trade;
 
 use Nldou\Youzan\Message\Message;
 
-class SellerShip extends Message
+class PartlySellerShip extends Message
 {
     /**
      * @var string
      */
-    public $type = 'trade_TradeSellerShip';
+    public $type = 'trade_TradePartlySellerShip';
 
     /**
      * Properties.
@@ -23,6 +23,8 @@ class SellerShip extends Message
     protected $properties = [
         // 订单号
         'tid' => 'tid',
+        // 订单明细号 string 例123456,234567,124343243
+        'oids' => 'oids',
         // 更新时间
         'update_time' => 'update_time'
     ];

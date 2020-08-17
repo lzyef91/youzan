@@ -99,14 +99,34 @@ class SalesmanApi extends YouzanApi
         $version = '3.0.1';
 
         $paramsMap = [
-            'start_time', // 查询开始时间（时间戳，单位秒）
-            'end_time', // 查询结束时间（时间戳，单位秒
-            'order_no', // 订单号
-            'mobile', // 手机号（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询）
-            'fans_type', // 粉丝类型（自有粉丝: fans_type = 1；当传mobile时，和fans_id一样传0）
+            // 查询开始时间（时间戳，单位秒）
+            'start_time',
+            // 查询结束时间（时间戳，单位秒
+            'end_time',
+            // 订单号
+            'order_no',
+            // 手机号
+            'mobile',
+            // 粉丝类型
+            // 1:代表微信自有粉丝；2：代表[微博平台]产生的粉丝；
+            // 9：代表粉丝类型为微信大账号粉丝；
+            // 188：代表[qq平台]产生的粉丝；736:代表[支付宝平台]产生的粉丝；
+            // 1181:代表[今日头条]产生的粉丝；
+            // 非上述fans_type：代表其他平台或小程序粉丝或者三方sdk产生的粉丝；
+            'fans_type',
+            // 粉丝id
+            // 有赞不同的合作渠道会生成不同渠道对应在有赞平台下的fans_id。
+            // fans_id和fans_type组成一个唯一的有赞用户标识。
+            // 从浏览器过来的下单的是拿不到fans_id。
+            // 大账号fans_id：通过微信去访问有赞店铺的商品等，系统会给用户生成fansid。
+            // 用户自有fans_id（从三方过来的）：关注任意一个公众号(包括有赞大账号)后生成ID。
             'fans_id', // 粉丝id（mobile或fans_id选其一，另者置为0，当fans_id和mobile都传时，优先按mobile查询
+            'group_id', // 销售员所属分组id
         ];
         $forceParamsMap = [
+            // 每页条数。默认20条，最大不能超过100，建议使用默认分页。
+            // 如果订单较多请使用时间参数分割。
+            // page_size 和page_no相乘总条数不能大于3200条
             'page_no',
             'page_size'
         ];

@@ -42,10 +42,18 @@ class CouponsApi extends YouzanApi
     {
         $method = 'youzan.ump.coupon.take';
         $version = '3.0.0';
-        $paramsMap = [];
+        $paramsMap = [
+            // 三方App用户ID，该参数仅限购买App开店插件的商家使用
+            'open_user_id',
+            // 用户手机号
+            'mobile',
+            'fans_id',
+            // 微信服务号对应的openid
+            'weixin_openid',
+        ];
         $forceParamsMap = [
             'coupon_group_id', // 优惠券/码活动ID
-            'weixin_openid', // 微信服务号对应的openid
+
         ];
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
         return $this->request($method, $version, $params);

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 销售员创建和更新
+ */
+
 namespace Nldou\Youzan\Message\Salesman;
 
 use Nldou\Youzan\Message\Message;
