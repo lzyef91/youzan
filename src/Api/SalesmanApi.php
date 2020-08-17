@@ -21,10 +21,20 @@ class SalesmanApi extends YouzanApi
         $method = 'youzan.salesman.accounts.get';
         $version = '3.0.0';
 
-        $paramsMap = [];
+        $paramsMap = [
+            /**
+             * 加入时间，时间戳（秒）
+             */
+            'start_time',
+            'end_time',
+            // 分组id
+            'group_id'
+        ];
         $forceParamsMap = [
+            // 页码，从1~100开始，分页数不能超过100页。page_size 和page_no相乘总条数不能大于3200条。
             'page_no',
-            'page_size' // 最大不超过100
+            // 每页条数。默认20条，最大不能超过100，建议使用默认分页。page_size 和page_no相乘总条数不能大于3200条。
+            'page_size'
         ];
         $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
 
@@ -33,6 +43,22 @@ class SalesmanApi extends YouzanApi
 
     /**
      * 账户信息
+     * [
+     *       "seller" => "2cAhDI",
+     *       "from_buyer_mobile" => "",
+     *       "kdt_id" => 18168297,
+     *       "money" => "555.30",
+     *       "level" => 1,
+     *       "mobile" => "18321136597",
+     *       "nickname" => "路兆洋",
+     *       "created_at" => "2017-12-27 15:34:01",
+     *       "order_num" => 9,
+     *       "shop_name" => "能量逗",
+     *       "fans_id" => 2377545783,
+     *       // 注意：分组没有设置则不返回
+     *       "group_id" => 1,
+     *       "group_name" => "分组1"
+     *  ]
      */
     public function accountShow($params)
     {

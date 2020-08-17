@@ -66,6 +66,28 @@ class UserApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
+    /**
+     * 获取客户信息
+     * 根据手机号，商家自有粉丝（fanstype为1的），yzUid（有赞注册手机号生成的账号ID）
+     * [
+     *       // 性别。0:未知；1:男；2:女
+     *       "gender" => 2,
+     *       // 是否为会员
+     *       "is_member" => false,
+     *       // 客户姓名
+     *       "name" => "18917329928",
+     *       // 客户手机
+     *       "mobile" => "18917329928",
+     *       "remark" => "",
+     *       // 联系地址，不存在时该字段不返回
+     *       "contact_address" => [
+     *          "province" => "上海市",
+     *          "city" => "上海市",
+     *          "area_code" => 310118,
+     *          "county" => "青浦区",
+     *       ],
+     *   ]
+     */
     public function show($params)
     {
         $method = 'youzan.scrm.customer.get';
@@ -81,6 +103,55 @@ class UserApi extends YouzanApi
         return $this->request($method, $version, $params);
     }
 
+    /**
+     * 依据有赞openid 或者手机号 获取用户简要信息
+     * @return array
+     * [
+     *       "country_code" => "+86",
+     *       "nick_name" => "Annie ppan",
+     *       "mobile" => "13918336226",
+     *       "yz_open_id" => "xBUDS3ub616666733490499584",
+     *       "avatar" => "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqfhuxzOmv9CiaqfEyxnmPM80sRYict8qltrcKzJ4mibTvnEAYicdM5jR7K3tQO9pQic2GXwPhOu7Y9ibaw/0",
+     * ]
+     */
+    public function basicShow($params)
+    {
+        $method = 'youzan.user.basic.get';
+        $version = '3.0.1';
+        $paramsMap = [
+            // 国家码，+86
+            'country_code',
+            // 手机号（注：手机号和yz_open_id必传其中1个）
+            'mobile',
+            // 有赞开放openid（（注：手机号和yz_open_id必传其中1个）
+            'yz_open_id'
+        ];
+        $forceParamsMap = [];
+        $params = $this->loadParams($params, $paramsMap, $forceParamsMap);
+        return $this->request($method, $version, $params);
+    }
+
+    /**
+     * 根据微信粉丝用户的 weixin_openid 或 fans_id 获取用户信息
+     * @return array
+     * [
+     *      "user" => [
+     *          "is_follow" => false,
+     *          "city" => "苏州",
+     *          "sex" => "f",
+     *          "avatar" => "http://thirdwx.qlogo.cn/mmopen/wraibGcyPEb9Tvia4uUF0AT71vrJFQUVdqkicIClSdAEfSPpP1DX9nsjb74icegIFKS7kibiaudjte79CRpsbIFrW1pj3jkFUtBPkV/132",
+     *          "traded_num" => 1,
+     *          "points" => 1,
+     *          "nick" => "penny",
+     *          "follow_time" => 1576150577,
+     *          "province" => "江苏",
+     *          "user_id" => 10196625339,
+     *          "union_id" => "oOYHo1KHkeQlosVNtmj17T7366l8",
+     *          "weixin_openid" => "oHlcTtwMMKUjZ2HfF51hQwTEoyss",
+     *          "traded_money" => "208.00",
+     *      ],
+     * ]
+     */
     public function wxShow($params)
     {
         $method = 'youzan.users.weixin.follower.get';
