@@ -120,9 +120,10 @@ class Create extends Message
 
     /**
      * @param array $msg
+     * @param array $httpData
      */
-    public function __construct($msg)
+    public function __construct($msg, $httpData)
     {
-        parent::__construct($msg);
+        parent::__construct($msg, $httpData);
     }
 }

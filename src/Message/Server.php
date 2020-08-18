@@ -87,18 +87,16 @@ class Server
         $this->message = $this->getMessageInstance();
 
         // 消息合法性
-        if (!is_null($this->message) && $this->message instanceof Message) {
-            // 消息类型对应的处理器
-            if (array_key_exists($this->message->type, $this->handlers)) {
-                // 处理器集合
-                $handlers = $this->handlers[$this->message->type];
-                // 按顺序执行
-                foreach ($handlers as $handler) {
-                    // 如果处理器返回false，则接下来的处理器不执行
-                    $res = $handler->handle($this->message);
-                    if ($res === false) {
-                        break;
-                    }
+        if (!is_null($this->message) && $this->message instanceof Message
+            && \array_key_exists($this->message->type, $this->handlers)) {
+            // 处理器集合
+            $handlers = $this->handlers[$this->message->type];
+            // 按顺序执行
+            foreach ($handlers as $handler) {
+                // 如果处理器返回false，则接下来的处理器不执行
+                $res = $handler->handle($this->message);
+                if ($res === false) {
+                    break;
                 }
             }
         }
@@ -115,15 +113,22 @@ class Server
 
     protected function getMessageInstance()
     {
-        if (array_key_exists($this->httpType, Message::MESSAGE_TYPE_MAP)) {
+        if (\array_key_exists($this->httpType, Message::MESSAGE_TYPE_MAP)) {
             // post data
             $httpData = json_decode($this->httpRequestBody, true);
-            // msg内容经过 urlencode 编码，需进行解码
-            // 没有msg内容直接返回
-            $msg = \array_key_exists('msg', $httpData) ? json_decode(urldecode($httpData['msg']), true) : $httpData;
+
+            if (\array_key_exists('msg', $httpData)) {
+                // msg内容经过 urlencode 编码，需进行解码
+                $msg = json_decode(urldecode($httpData['msg']), true);
+                $httpData['msg'] = $msg;
+            } else {
+                // 没有msg内容，直接返回
+                $msg = $httpData;
+            }
+
             // message实例
             $msgCls = Message::MESSAGE_TYPE_MAP[$this->httpType];
-            return new $msgCls($msg);
+            return new $msgCls($msg, $httpData);
         }
 
         return NULL;

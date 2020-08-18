@@ -96,6 +96,7 @@ class UserApi extends YouzanApi
         $forceParamsMap = [
             'account' => [
                 'account_id',
+                // 目前支持以下选项（只支持传一种）： FansID：自有粉丝ID， Mobile：手机号， YouZanAccount：有赞账号
                 'account_type'
             ]
         ];
