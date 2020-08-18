@@ -119,7 +119,8 @@ class Server
             // post data
             $httpData = json_decode($this->httpRequestBody, true);
             // msg内容经过 urlencode 编码，需进行解码
-            $msg = json_decode(urldecode($httpData['msg']), true);
+            // 没有msg内容直接返回
+            $msg = \array_key_exists('msg', $httpData) ? json_decode(urldecode($httpData['msg']), true) : $httpData;
             // message实例
             $msgCls = Message::MESSAGE_TYPE_MAP[$this->httpType];
             return new $msgCls($msg);
