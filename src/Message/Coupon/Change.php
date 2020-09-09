@@ -20,11 +20,11 @@ class Change extends Message
      * @var array
      */
     protected $properties = [
-        // fans_id 用户粉丝id，优先级低于mobile，当 mobile 有值时，fans_id 为0	1000000
+        // (买家端)fans_id 用户粉丝id，优先级低于mobile，当 mobile 有值时，fans_id 为0	1000000
         'fans_id' => 'fans_id',
-        // 用户粉丝类型，有值时为1（店铺绑定了认证服务号的自有粉丝），优先级低于mobile，当 mobile 有值时，fans_type 为0
+        // (买家端)用户粉丝类型，有值时为1（店铺绑定了认证服务号的自有粉丝），优先级低于mobile，当 mobile 有值时，fans_type 为0
         'fans_type' => 'fans_type',
-        // 用户手机号
+        // (买家端)用户手机号
         'mobile' => 'mobile',
         // 优惠券或优惠码ID，券或码的唯一标识 string
         'id' => 'id',
